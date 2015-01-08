@@ -123,7 +123,7 @@ public class Balancer extends Activity implements View.OnClickListener {
 		
 		String balanced = equationBalance(equation);
 		
-		if (final == null) {
+		if (balanced == null) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Error!");
 			builder.setMessage("The equation is already balanced or an error occured in computing the balanced equation. Please retype the equation above.");
@@ -254,7 +254,7 @@ public class Balancer extends Activity implements View.OnClickListener {
             // generate final equation
             String newequ1 = generateFinalEquation(rterms1, pterms1, fin);
             String newequ2 = removeSpaces(newequ1);
-            if (newequ2.equals(equation1)) {
+            if (newequ2.equals(removeSpaces(equation))) {
                 return null;
             }
             return newequ2;
@@ -320,7 +320,7 @@ public class Balancer extends Activity implements View.OnClickListener {
         for (int i = 0; i < terms.size(); i++) {
             // match single uppercase letter, or uppercase with 1 or 2 lowercase
             Pattern p1 = Pattern.compile("([A-Z])(\\d+)");
-            String comp = rterms.get(i);
+            String comp = terms.get(i);
             Matcher m1 = p1.matcher(comp);
             while (m1.find()) {
                 if (!elements.contains(m1.group(1))) {
@@ -343,9 +343,9 @@ public class Balancer extends Activity implements View.OnClickListener {
                             + m3.group(3));
                 }
             }
-            if (rterms.get(i).length() == 1) {
-                String e = rterms.get(i);
-                rterms.set(i, e + "1");
+            if (terms.get(i).length() == 1) {
+                String e = terms.get(i);
+                terms.set(i, e + "1");
             }
         }
 
